@@ -1,4 +1,5 @@
 import axios from 'axios'
+import * as url from '../configs/api-url.json'
 
 type ChineseJoke = {
   description: string;
@@ -8,9 +9,7 @@ type ChineseJoke = {
 export async function getChineseJoke() {
   let reply = ''
   try {
-    const response = await axios.get<ChineseJoke>(
-      'https://quiet-atoll-68130.herokuapp.com/api/chinesejoke'
-    )
+    const response = await axios.get<ChineseJoke>(`${url.CHINESE_JOKE_URL}`)
     const { data } = response
     reply = data.answer !== '' ? `Q: ${data.description}\nA: ${data.answer}` : `${data.description}`
     return {
