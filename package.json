@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "dependencies": {
     "@line/bot-sdk": "^7.5.2",
+    "axios": "^1.3.5",
     "dotenv": "^16.0.3"
   },
   "devDependencies": {
