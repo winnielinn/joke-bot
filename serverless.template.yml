@@ -1,0 +1,3 @@
+name: joke-bot
+description: Joke BOT built with LINE Messaging API + Node.js + Typescript
+keywords: aws, serverless, faas, lambda, node, typescript, linebot
