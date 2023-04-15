@@ -2,6 +2,7 @@ import { Client, WebhookEvent, ClientConfig, TextMessage } from '@line/bot-sdk'
 import * as dotenv from 'dotenv'
 import { menuMessage } from './messages/flex-message'
 import { welcomeMessage } from './messages/text-message'
+import { getChineseJoke } from './apis/chinese-jokes'
 
 
 export const webhook = async (event: any, _context: any) => {
@@ -42,9 +43,8 @@ const messageTextJokeGenerator = async (client: Client, event: WebhookEvent): Pr
       case 'text': 
         const { text }: TextMessage = message;
         if (text === '隨機中文笑話') {
-          await client.replyMessage(replyToken, welcomeMessage)
-          // const chineseJoke = (await getChineseJokes()) as TextMessage;
-          // await client.replyMessage(replyToken, chineseJoke);
+          const chineseJoke = (await getChineseJoke()) as TextMessage;
+          await client.replyMessage(replyToken, chineseJoke);
         } else if (text === '隨機英文笑話') {
           await client.replyMessage(replyToken, welcomeMessage)
           // const englishJoke = (await getEnglishJokes()) as TextMessage;
