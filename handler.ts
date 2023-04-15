@@ -17,26 +17,10 @@ export const webhook = async (event: any, _context: any) => {
   const response: WebhookEvent = body.events[0]
   try {
     await addFriendWelcome(client, response)
-    // await jokeGenerator(client, response)
+    await messageTextJokeGenerator(client, response)
   } catch (err) {
-    console.log(err)
+    console.error(err)
   }
-  if (response.type !== 'message') {
-    return
-  }
-  const { replyToken } = response
-
-  if (response.message.type === 'text') {
-    const { text } = response.message
-    const responseText: TextMessage = {
-      type: 'text',
-      text,
-    }
-    await client.replyMessage(replyToken, responseText)
-  } else {
-    await client.replyMessage(replyToken, menuMessage)
-  }
-
 }
 
 const addFriendWelcome = async (client: Client, event: WebhookEvent): Promise<void> => {
@@ -44,6 +28,34 @@ const addFriendWelcome = async (client: Client, event: WebhookEvent): Promise<vo
     if (event.type !== 'follow') return
     const { replyToken } = event
     await client.replyMessage(replyToken, welcomeMessage)
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+const messageTextJokeGenerator = async (client: Client, event: WebhookEvent): Promise<void> => {
+  try {
+    if (event.type !== 'message') return
+    const { replyToken } = event
+    const { message } = event
+    switch (message.type) {
+      case 'text': 
+        const { text }: TextMessage = message;
+        if (text === '隨機中文笑話') {
+          await client.replyMessage(replyToken, welcomeMessage)
+          // const chineseJoke = (await getChineseJokes()) as TextMessage;
+          // await client.replyMessage(replyToken, chineseJoke);
+        } else if (text === '隨機英文笑話') {
+          await client.replyMessage(replyToken, welcomeMessage)
+          // const englishJoke = (await getEnglishJokes()) as TextMessage;
+          // await client.replyMessage(replyToken, englishJoke);
+        } else {
+          await client.replyMessage(replyToken, menuMessage);
+        }
+      break;
+      default:
+        await client.replyMessage(replyToken, menuMessage);
+    }
   } catch (err) {
     console.error(err)
   }
