@@ -9,7 +9,7 @@ const menuImage: FlexImage = {
   action: {
     type: 'uri',
     label: 'Browse',
-    uri: 'https://github.com/winnielinn/joke-generator-line-bot',
+    uri: 'https://github.com/winnielinn/joke-bot',
   },
 }
 
