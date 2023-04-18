@@ -1,3 +1,4 @@
 {
-  "CHINESE_JOKE_URL": "https://quiet-atoll-68130.herokuapp.com/api/chinesejoke"
+  "CHINESE_JOKE_URL": "https://quiet-atoll-68130.herokuapp.com/api/chinesejoke",
+  "ENGLISH_JOKE_URL": "https://icanhazdadjoke.com"
 }
