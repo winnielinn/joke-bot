@@ -20,6 +20,7 @@ export const webhook = async (event: any, _context: any) => {
   try {
     await addFriendWelcome(client, response)
     await messageTextJokeGenerator(client, response)
+    await messagePostbackJokeGenerator(client, response)
   } catch (err) {
     console.error(err)
   }
@@ -55,6 +56,27 @@ const messageTextJokeGenerator = async (client: Client, event: WebhookEvent): Pr
       break
       default:
         await client.replyMessage(replyToken, menuMessage)
+    }
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+const messagePostbackJokeGenerator = async (client: Client, event: WebhookEvent): Promise<void> => {
+  try {
+    if (event.type !== 'postback') return
+    const { replyToken } = event
+    const { postback } = event
+    console.log('postback', postback)
+    switch (postback.data) {
+      case 'randomChineseJoke': 
+        const chineseJoke = (await getChineseJoke()) as TextMessage
+        await client.replyMessage(replyToken, chineseJoke)
+      break
+      case 'randomEnglishJoke':
+        const englishJoke = (await getEnglishJoke()) as TextMessage
+        await client.replyMessage(replyToken, englishJoke)
+      break
     }
   } catch (err) {
     console.error(err)
