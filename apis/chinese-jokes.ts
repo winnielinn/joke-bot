@@ -2,8 +2,8 @@ import axios from 'axios'
 import * as url from '../configs/api-url.json'
 
 type ChineseJoke = {
-  description: string;
-  answer: string;
+  description: string
+  answer: string
 }
 
 export async function getChineseJoke() {

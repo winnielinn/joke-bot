@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+import fetch from 'node-fetch'
 import * as url from '../configs/api-url.json'
 
 export async function getEnglishJoke() {
@@ -8,9 +8,9 @@ export async function getEnglishJoke() {
       headers: {
         Accept: 'application/json',
       },
-    };
-    const response = await fetch(`${url.ENGLISH_JOKE_URL}`, options);
-    const data = await response.json();
+    }
+    const response = await fetch(`${url.ENGLISH_JOKE_URL}`, options)
+    const data = await response.json()
     return {
       type: 'text',
       text: data.joke
