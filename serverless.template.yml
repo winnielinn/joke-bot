@@ -1,3 +1,19 @@
-name: joke-bot
-description: Joke BOT built with LINE Messaging API + Node.js + Typescript
-keywords: aws, serverless, faas, lambda, node, typescript, linebot
+service: #service name
+frameworkVersion: #serverless framework version
+
+# Use AWS & node.js in this application
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: #region in AWS server
+
+functions:
+  webhook: # Function name
+    handler: handler.webhook  # Reference to file handler.js & exported function 'webhook'
+    events: # All events associated with this function
+      - httpApi:
+          path: /
+          method: post
+
+plugins:
+  - serverless-plugin-typescript
